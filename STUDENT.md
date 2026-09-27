@@ -1,18 +1,16 @@
 # Student Profile
 
-Fill in every field below before your first commit. This file is how instructors identify your submission quickly. Commit it as your very first change after forking.
-
----
+# Student Profile
 
 | Field | Your Answer |
 |-------|-------------|
-| Full Name | |
-| GitHub Username | |
-| Email Address | |
-| Phone / WhatsApp | |
-| Cohort | Havilah Club Internship — Cohort |
-| Programme Start Date | |
-| LinkedIn Profile | |
+| Full Name | michealchizaram |
+| GitHub Username | chizaram366 |
+| Email Address | chizaram366@gmail.com |
+| Phone / WhatsApp | 09070659511|
+| Cohort | Havilah Club Internship [TBD]|
+| Programme Start Date | [21/09/2026] |
+| LinkedIn Profile |X: https://x.com/m_ilkish|
 
 ---
 
@@ -20,20 +18,4 @@ Fill in every field below before your first commit. This file is how instructors
 
 Write 2–3 sentences describing what you specifically want to be able to do by the end of the 8 weeks.
 
-> Replace this line with your learning objective.
-
----
-
-## How to update this file
-
-1. Open `STUDENT.md` in VS Code.
-2. Fill in every row of the table and your learning objective.
-3. Save the file.
-4. Commit it:
-   ```bash
-   git add STUDENT.md
-   git commit -m "feat: add student profile"
-   git push
-   ```
-
-Do this before working on any task.
+> By the end of the 8-week programme, I want to become confident in building practical AI and automation solutions using Python, n8n, APIs, and AI tools. I also want to develop the ability to turn real-world problems into useful, well-documented projects that I can showcase in my portfolio.
