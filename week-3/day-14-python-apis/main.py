@@ -1,40 +1,106 @@
-# Day 14 — Python and APIs
-# Task: Build a Python program that retrieves information from an API
-# and processes the JSON response to produce a useful output.
-# Submit this script + a screenshot of the printed output.
+# ============================================================
+# HAVILAH CLUB INTERNSHIP - DAY 14
+# PYTHON + APIs
+# ============================================================
 
 import requests
-import os
-
-# Load your API key from the environment (never hardcode it here).
-# Copy .env.example to .env and fill in your key before running.
-API_KEY = os.getenv("API_KEY", "")
-BASE_URL = ""  # TODO: set your chosen API's base URL
 
 
-# ── Step 1: Fetch Data ────────────────────────────────────────────────────────
-# Make a GET request to the API and return the parsed JSON response.
-# Handle network errors and non-200 status codes gracefully.
+# Open Library Search API
+# This API is free and does not require an API key.
+BASE_URL = "https://openlibrary.org/search.json"
+
+
+# ============================================================
+# STEP 1: FETCH DATA
+# ============================================================
 
 def fetch_data(query):
-    # TODO: build params dict and call requests.get()
-    # TODO: check response.status_code before calling .json()
-    pass
+    """Fetch book data from the Open Library API."""
+
+    params = {
+        "q": query,
+        "limit": 5
+    }
+
+    try:
+        response = requests.get(BASE_URL, params=params, timeout=10)
+
+        print("\n===== API REQUEST =====")
+        print("Status Code:", response.status_code)
+        print("Request URL:", response.url)
+
+        if response.status_code != 200:
+            print("API request failed.")
+            return None
+
+        data = response.json()
+
+        print("\n===== JSON RESPONSE TYPE =====")
+        print(type(data).__name__)
+
+        return data
+
+    except requests.exceptions.RequestException as error:
+        print("\nNetwork error occurred:")
+        print(error)
+        return None
 
 
-# ── Step 2: Parse and Display ─────────────────────────────────────────────────
-# Extract at least 3 useful pieces of information from the response.
-# Print them in a clear, labelled format — not raw JSON.
+# ============================================================
+# STEP 2: PARSE AND DISPLAY
+# ============================================================
 
 def display_results(data):
-    # TODO: navigate the JSON structure and print each field with a label
-    pass
+    """Extract and display useful information from the API response."""
+
+    if not data:
+        print("No data was returned.")
+        return
+
+    books = data.get("docs", [])
+
+    if not books:
+        print("No books found.")
+        return
+
+    print("\n===== BOOK SEARCH RESULTS =====")
+
+    for number, book in enumerate(books, start=1):
+        title = book.get("title", "Unknown title")
+
+        authors = book.get("author_name", ["Unknown author"])
+        author = ", ".join(authors[:2])
+
+        year = book.get("first_publish_year", "Unknown")
+
+        editions = book.get("edition_count", "Unknown")
+
+        print(f"\nBook {number}")
+        print(f"Title: {title}")
+        print(f"Author: {author}")
+        print(f"First Publication Year: {year}")
+        print(f"Number of Editions: {editions}")
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+# ============================================================
+# MAIN
+# ============================================================
+
 def main():
-    query = input("Enter your search query: ")
+    print("\n========================================")
+    print("     HAVILAH CLUB - DAY 14")
+    print("          PYTHON + APIs")
+    print("========================================")
+
+    query = input("\nEnter a book search query: ").strip()
+
+    if not query:
+        print("Please enter a search query.")
+        return
+
     data = fetch_data(query)
+
     if data:
         display_results(data)
 
